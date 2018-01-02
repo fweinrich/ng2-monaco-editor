@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import {EditorModule} from "./modules/editor/editor.module";
 
 
 @NgModule({
@@ -10,7 +11,9 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    EditorModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
