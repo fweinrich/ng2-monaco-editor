@@ -20,6 +20,7 @@ export class EditorComponent implements OnInit {
 
   @ViewChild('editor') editorContent: ElementRef;
   @Input() language: string;
+  @Input() options: any = {};
   @Input() set value(v:string) {
     if (v !== this._value) {
       this._value = v;
@@ -63,12 +64,13 @@ export class EditorComponent implements OnInit {
 
   // Will be called once monaco library is available
   initMonaco() {
+    const monaco_options = this.options;
+    monaco_options.value = this._value;
+    monaco_options.language = this.language;
+
     var myDiv: HTMLDivElement = this.editorContent.nativeElement;
     this._editor = monaco.editor.create(myDiv,
-      {
-        value: this._value,
-        language: this.language
-      });
+      monaco_options);
     this._editor.getModel().onDidChangeContent( (e)=>
     {
       this.updateValue(this._editor.getModel().getValue());
